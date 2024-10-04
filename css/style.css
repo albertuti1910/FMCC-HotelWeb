@@ -231,6 +231,18 @@ table {
   border-spacing: 0;
 }
 
+.text-center {
+  font-family: sans-serif;
+}
+
+.video-container {
+  display: flex; /* Usa flexbox para centrar */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 100%; /* Ocupa todo el alto de la ventana */
+  margin-top: 130px; /* Ajusta este valor para bajar el video */
+}
+
 td,
 th {
   padding: 0;
@@ -7665,7 +7677,7 @@ figure {
   box-shadow: none;
   border: transparent;
   min-width: 12em;
-  *width: 12em;
+  
 }
 
 .sf-menu a {
@@ -7719,7 +7731,7 @@ figure {
 
 .sf-arrows .sf-with-ul {
   padding-right: 2.5em;
-  *padding-right: 1em;
+  
 }
 
 .sf-arrows .sf-with-ul:after {
@@ -8043,6 +8055,7 @@ div.cs-select span {
   position: relative;
   display: inline-block;
   margin-top: 0;
+  margin-left: 0;
   margin-bottom: 0;
   -webkit-box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.2);
@@ -8095,6 +8108,7 @@ div.cs-select span {
   float: left;
   position: relative;
   padding: 14px;
+  
 }
 @media screen and (max-width: 829px) {
   #availability .a-col {
@@ -8130,7 +8144,7 @@ div.cs-select span {
   heght: 100%;
   line-height: 20px;
   padding: 14px;
-  display: block;
+  display: inline;
   width: 100%;
   color: #fff;
   text-align: left;
@@ -9055,7 +9069,7 @@ input[type="text"] {
   display: -moz-inline-stack;
   display: inline-block;
   zoom: 1;
-  *display: inline;
+  
   width: 30px;
   height: 2px;
   color: #000;
