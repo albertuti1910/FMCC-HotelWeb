@@ -91,6 +91,10 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
+	<link rel="manifest" href="/manifest.json">
+	<script src="geolocation.js"></script>
+
+
 </head>
 <body>
 	<div id="fh5co-wrapper">
@@ -127,8 +131,8 @@
 									<p><span>Riu Palace Maspalomas</span></p>
 										<h2>Reserve su estancia en un lugar único</h2>
 										<p>
-											<a href="index.html" class="btn btn-primary btn-lg">Reservar ahora</a>
-									</p>
+											<a href="index.html" class="btn btn-primary btn-lg" id="btnGeolocation">Reservar ahora</a>
+										</p>
 								</div>
 							</div>
 						</div>
@@ -430,43 +434,8 @@
 		</div>
 	</div>
 
-	<div id="testimonial">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="section-title text-center">
-						<h2>Nuestros clientes opinan...</h2>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<div class="testimony">
-						<blockquote>
-							&ldquo;Fin de semana de descanso, gastronomía de lujo, trato inmejorable y servicios de 10. Tuvimos la oportunidad de cenar en el Restaurante Krystal y en El Dunas, ambos exquisitos.&rdquo;
-						</blockquote>
-						<p class="author"><cite>Natalia</cite></p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="testimony">
-						<blockquote>
-							&ldquo;Excelente experiencia en este hotel de 5 estrellas, servicio impecable, instalaciones maravillosas y ubicación inmejorable. ¡Recomendado!&rdquo;
-						</blockquote>
-						<p class="author"><cite>Yeray</cite></p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="testimony">
-						<blockquote>
-							&ldquo;Como buen RIU, este hotel ofrece unas instalaciones actualizadas, un buffet variado y exquisito y un personal siempre atento y muy muy amable. Estuve unos días en pareja y todo fue perfecto.&rdquo;
-						</blockquote>
-						<p class="author"><cite>Juan Pablo</cite></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<script src="https://static.elfsight.com/platform/platform.js" async></script>
+	<div class="elfsight-app-5292aec2-beb5-4d90-8ac0-5e368d11ff95" data-elfsight-app-lazy></div>
 
 	<footer id="footer" class="fh5co-bg-color">
 		<div class="container">
@@ -555,7 +524,25 @@
 
 	<script src="js/tabs-scroll.js"></script>
 
+	<script>
+		if ('serviceWorker' in navigator) {
+			window.addEventListener('load', function() {
+				navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+					console.log('ServiceWorker registration successful with scope: ', registration.scope);
+				}, function(error) {
+					console.log('ServiceWorker registration failed: ', error);
+				});
+			});
+		}
+	</script>
 
+	<script>
+	// Asociar el botón con la función de geolocalización
+	document.getElementById('btnGeolocation').addEventListener('click', function(event) {
+  event.preventDefault(); // Evita que el enlace redirija a otra página
+  getLocation(); // Llama a la función para obtener la geolocalización
+	});
+	</script>
 
 </body>
 </html>
