@@ -9256,12 +9256,12 @@ input[type="text"] {
 }
 
 /* Aumenta el z-index de los elementos que necesitas que estén por encima */
-#hotel-facilities, #fh5co-header, .tabs-nav a {
+#hotel-facilities, .tabs-nav a {
   position: relative;
   z-index: 10 !important;
 }
 
-#featured-hotel, #fh5co-header, .tabs-nav a {
+#featured-hotel, .tabs-nav a {
   position: relative;
   z-index: 10 !important;
 }
