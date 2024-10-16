@@ -9249,3 +9249,19 @@ input[type="text"] {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+#customer-reviews {
+  position: relative;
+  z-index: 1 !important; /* Asegúrate de que tenga un z-index menor que los elementos importantes */
+}
+
+/* Aumenta el z-index de los elementos que necesitas que estén por encima */
+#hotel-facilities, #fh5co-header, .tabs-nav a {
+  position: relative;
+  z-index: 10 !important;
+}
+
+#featured-hotel, #fh5co-header, .tabs-nav a {
+  position: relative;
+  z-index: 10 !important;
+}
