@@ -61,7 +61,7 @@ clientes = [
     ("Alberto", os.getenv("CORREO_ALBERTO"), 1),
     ("Carlota", os.getenv("CORREO_CARLOTA"), 1),
     ("Joel", os.getenv("CORREO_JOEL"), 1),
-    ("Dani", os.getenv("CORREO_DANI"), 0),
+    ("Dani", os.getenv("CORREO_DANI"), 1),
 ]
 
 for nombre, correo, comunicaciones in clientes:
