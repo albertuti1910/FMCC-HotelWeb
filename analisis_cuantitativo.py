@@ -11,7 +11,9 @@ import seaborn as sns
 import numpy as np
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
-
+import pandas as pd
+from textblob import TextBlob  # Para análisis de sentimiento simple
+import matplotlib.pyplot as plt
 # Cargar el archivo Excel
 file_path = 'c:/Users/yadai/Downloads/FMCC - Actividad 4.xlsx'  # Cambia "ruta_del_archivo" por la ubicación del archivo
 data_booking = pd.read_excel(file_path, sheet_name='Booking')
@@ -38,6 +40,7 @@ def regression_analysis(df, target_variable, independent_vars):
     print("Intercepto:", model.intercept_)
     print("Error cuadrático medio (MSE):", mse)
 
+
 # VARIABLES (ajusta estas según tus datos)
 target_variable1 = 'Valoración /10'  # Cambia por la variable dependiente
 target_variable2 = 'Valoración /5'
@@ -45,10 +48,9 @@ independent_vars = ['Limpieza', 'Personal']  # Cambia por las independientes
 
 # Aplica regresión en ambas hojas
 # Aquí elige las columnas de tu interés en cada conjunto
-print("Regreción de Booking")
 regression_analysis(data_booking, target_variable1, independent_vars)
-print("Regreción de TripAdvisor")
 regression_analysis(data_tripadvisor, target_variable2, independent_vars)
+
 
 # ANÁLISIS FACTORIAL
 def factorial_analysis(df, n_factors):
@@ -158,3 +160,57 @@ print("Booking:")
 clustered_data, cluster_labels = analyze_clusters(data_booking[selected_columns], max_clusters=5)
 print("TripAdvisor:")
 clustered_data, cluster_labels = analyze_clusters(data_tripadvisor[selected_columns], max_clusters=5)
+
+
+
+# Cargar el archivo Excel
+
+# Asegúrate de que hay una columna con comentarios (ajusta el nombre según el archivo)
+comments_column = 'Comentario'  # Cambia según el nombre de la columna en tu archivo
+comments = data_booking[comments_column].dropna()  # Elimina filas con valores nulos
+
+# Función para análisis de sentimiento
+def analyze_sentiment(text):
+    """
+    Analiza el sentimiento de un texto usando TextBlob.
+    Retorna una tupla con la polaridad y el sentimiento.
+    """
+    blob = TextBlob(text)
+    polarity = blob.sentiment.polarity  # Valor entre -1 (negativo) y 1 (positivo)
+    if polarity > 0:
+        sentiment = 'Positivo'
+    elif polarity < 0:
+        sentiment = 'Negativo'
+    else:
+        sentiment = 'Neutral'
+    return polarity, sentiment
+
+# Aplicar análisis de sentimiento
+data_booking['Polarity'], data_booking['Sentiment'] = zip(*comments.apply(analyze_sentiment))
+
+# Mostrar resultados
+print(data_booking[['Comentario', 'Polarity', 'Sentiment']])
+
+# Graficar distribución de sentimientos
+sentiment_counts = data_booking['Sentiment'].value_counts()
+sentiment_counts.plot(kind='bar', color=['green', 'red', 'gray'])
+plt.title("Distribución de Sentimientos")
+plt.xlabel("Sentimiento")
+plt.ylabel("Frecuencia")
+plt.show()
+
+comments_column = 'Comentario'  # Cambia según el nombre de la columna en tu archivo
+comments = data_tripadvisor[comments_column].dropna()  # Elimina filas con valores nulos
+
+data_tripadvisor['Polarity'], data_tripadvisor['Sentiment'] = zip(*comments.apply(analyze_sentiment))
+
+# Mostrar resultados
+print(data_tripadvisor[['Comentario', 'Polarity', 'Sentiment']])
+
+# Graficar distribución de sentimientos
+sentiment_counts = data_tripadvisor['Sentiment'].value_counts()
+sentiment_counts.plot(kind='bar', color=['green', 'red', 'gray'])
+plt.title("Distribución de Sentimientos")
+plt.xlabel("Sentimiento")
+plt.ylabel("Frecuencia")
+plt.show()
